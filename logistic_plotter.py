@@ -28,7 +28,7 @@ def main():
             filename = os.fsdecode(file)
             if filename[0] is not '.' and filename[11] is not '5' and filename[10] is not '7': # ignore certain files
                 temp_data = np.genfromtxt("logistic_experiment_results/" + folder + "/" + filename)
-                if temp_data[3000] is not "nan" or temp_data[10] < temp_data[3000]:
+                if not np.isnan(temp_data).any() or temp_data[10][0] < temp_data[3000][0]:
                     legend_list.append(filename[9:len(filename)-4])
                     data.append(temp_data)
                     gen = np.arange(3500)
