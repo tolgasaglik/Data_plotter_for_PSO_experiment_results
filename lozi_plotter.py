@@ -26,7 +26,7 @@ def main():
         for file in os.listdir(directory):
             filename = os.fsdecode(file)
             print(filename)
-            if filename[6] is '5' or str(filename) is "lozi_basic.dat": # ignore certain files
+            if (filename[6] is '5') or ('basic' in filename): # ignore certain files
                 print(filename)
                 temp_data = np.genfromtxt("lozi_experiment_results/" + folder + "/" + filename)
                 if not np.isnan(temp_data).any():
@@ -35,11 +35,11 @@ def main():
                         legend_list.append(filename[5:len(filename)-4])
                         gen = np.arange(len(average))
                         plt.plot(gen, average, '-')
-        temp_data = np.genfromtxt("lozi_experiment_results/" + folder + "/lozi_basic.dat")
-        average = np.average(temp_data, axis=1)
-        gen = np.arange(len(average))
-        legend_list.append('basic')
-        plt.plot(gen, average, '-')
+        # temp_data = np.genfromtxt("lozi_experiment_results/" + folder + "/lozi_basic.dat")
+        # average = np.average(temp_data, axis=1)
+        # gen = np.arange(len(average))
+        # legend_list.append('basic')
+        # plt.plot(gen, average, '-')
         plt.xlabel("Generation")
         plt.ylabel("Minimum Fitness")
         plt.legend(legend_list, loc='upper right')
@@ -53,7 +53,7 @@ def main():
         legend_list = []
         for file in os.listdir(directory):
             filename = os.fsdecode(file)
-            if filename[0] is not '.' and (filename[9] is '1' or filename is "lozi_basic.dat"): # ignore certain files
+            if filename[0] is not '.' and (filename[9] is '1' or ('basic' in filename)): # ignore certain files
                 temp_data = np.genfromtxt("lozi_experiment_results/" + folder + "/" + filename)
                 if not np.isnan(temp_data).any():
                     average = np.average(temp_data, axis=1)
@@ -61,14 +61,14 @@ def main():
                         legend_list.append(filename[5:len(filename) - 4])
                         gen = np.arange(len(average))
                         plt.plot(gen, average, '-')
-        temp_data = np.genfromtxt("lozi_experiment_results/" + folder + "/lozi_basic.dat")
-        average = np.average(temp_data, axis=1)
-        gen = np.arange(len(average))
-        plt.plot(gen, average, '-')
+        # temp_data = np.genfromtxt("lozi_experiment_results/" + folder + "/lozi_basic.dat")
+        # average = np.average(temp_data, axis=1)
+        # gen = np.arange(len(average))
+        # plt.plot(gen, average, '-')
+        # legend_list.append('basic')
         plt.title(folder.swapcase())
         plt.xlabel("Generation")
         plt.ylabel("Minimum Fitness")
-        legend_list.append('basic')
         plt.legend(legend_list, loc='upper right')
         plt.savefig('plots/lozi_fixed_b_' + folder + '.png', dpi=500)
         #plt.show()
